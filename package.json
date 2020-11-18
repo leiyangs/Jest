@@ -1,0 +1,18 @@
+{
+  "name": "jset",
+  "version": "1.0.0",
+  "description": "- 每次写完代码提交后实现自动测试，测试代码",
+  "main": "parser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/preset-env": "^7.12.1",
+    "jest": "^26.6.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.15"
+  }
+}
