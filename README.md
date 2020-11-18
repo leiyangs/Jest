@@ -28,4 +28,4 @@
 
 单独执行某个test.js `npx parser.test.js`
 
-`npx jest watchAll`
+监控`npx jest watchAll`

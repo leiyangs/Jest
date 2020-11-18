@@ -14,6 +14,6 @@ it('测试不相等情况', () => {
 })
 
 it('是否包含，是否匹配', () => {
-  expect('hello').toContain('o');
-  expect('hello').toMatch(/hello/);
+  expect('hello').toContain('o'); // 包含
+  expect('hello').toMatch(/hello/); // 正则匹配
 })
