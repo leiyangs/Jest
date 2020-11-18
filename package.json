@@ -4,7 +4,7 @@
   "description": "- 每次写完代码提交后实现自动测试，测试代码",
   "main": "parser.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "author": "",
   "license": "ISC",

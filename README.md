@@ -28,4 +28,6 @@
 
 单独执行某个test.js `npx parser.test.js`
 
-监控`npx jest watchAll`
+监控所有测试文件 `npx jest --watchAll`
+
+只监控改变的测试文件 `npx jest --watch`
