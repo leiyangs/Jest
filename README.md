@@ -31,3 +31,135 @@
 监控所有测试文件 `npx jest --watchAll`
 
 只监控改变的测试文件 `npx jest --watch`
+
+## vue-test-utils Jest 集成
+
+### vue-test-utils
+
+### Jest
+
+1、安装Jest和vue-test-utils
+
+```bash
+npm install --save-dev jest @vue/test-utils
+```
+
+package.json中写入命令
+
+```bash
+{
+  "scripts": {
+    "test:unit": "jest"
+  }
+}
+```
+
+2、为了告诉 Jest 如何处理 *.vue 文件，我们需要安装和配置 vue-jest 预处理器：
+
+```bash
+npm install --save-dev vue-jest
+```
+
+3、package.json 中创建一个 jest 块：
+
+```json
+{
+  // ...
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      // 告诉 Jest 处理 `*.vue` 文件
+      "vue"
+    ],
+    "transform": {
+      // 用 `vue-jest` 处理 `*.vue` 文件
+      ".*\\.(vue)$": "vue-jest"
+    },
+    "moduleNameMapper": {
+      // 支持源代码中相同的 `@` -> `src` 别名
+      "^@/(.*)$": "<rootDir>/src/$1"
+    }
+  }
+}
+```
+
+4、为Jest配置babel
+babel版本是6的，要安装babel-jest@21
+`npm install babel-jest@21.0.2`
+Requires Babel “^7.0.0-0”, but was loaded with “6.26.3”.
+`cnpm i babel-core@^7.0.0-bridge.0 @babel/core regenerator-runtime`
+
+```bash
+npm install --save-dev babel-jest
+```
+
+package.json 的 jest.transform 里添加一个入口，来告诉 Jest 用 babel-jest 处理 JavaScript 测试文件：
+
+```json
+{
+  // ...
+  "jest": {
+    // ...
+    "transform": {
+      // ...
+      // 用 `babel-jest` 处理 js
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    }
+    // ...
+  }
+}
+
+```
+
+.babelrc配置
+
+```json
+{
+  "presets": [["env", { "modules": false }]],
+  "env": {
+    "test": {
+      "presets": [["env", { "targets": { "node": "current" } }]]
+    }
+  }
+}
+```
+
+5、 example测试代码
+
+```js
+import { mount } from '@vue/test-utils';
+import CommonTable from '@/components/CommonTable';
+
+describe('CommonTable test', () => {
+  it('测试公共table组件', () => {
+    const wrapper = mount(CommonTable, {
+      propsData: {
+        list: ['a','b','c']
+      }
+    });
+    expect(wrapper.props()).toContian('a');
+  })
+})
+
+```
+
+## vue-test-utils Mocha 集成
+
+1、安装测试依赖
+
+```bash
+npm install --save-dev @vue/test-utils mocha mochapack
+```
+
+package.json
+
+```json
+{
+  "scripts": {
+    "test": "mochapack --webpack-config webpack.config.js --require test/setup.js test/**/*.spec.js"
+  }
+}
+```
+
+2、
